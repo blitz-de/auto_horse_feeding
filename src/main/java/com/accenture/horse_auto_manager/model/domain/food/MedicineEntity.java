@@ -5,18 +5,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-@Entity //horse contrlller, feed controller, verwaltungscontroller
+@Entity
 @Table(name = "tab_medicine")
 @Getter
 @Setter
@@ -37,5 +33,4 @@ public class MedicineEntity {
 
     @OneToMany(mappedBy = "medicine")
     private List<HorseEntity> horses;
-    //private Long availableQuantity;
 }

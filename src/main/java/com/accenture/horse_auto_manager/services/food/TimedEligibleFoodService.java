@@ -20,8 +20,11 @@ public class TimedEligibleFoodService {
     HorseEntityToHorseDTOMapper horseEntityMapper;
 
     // TODO: correct mistake. Return value doesnt return the time in-beween
-    public boolean eatingTimeBetween(LocalTime localTime1, LocalTime localTime2){
-        if (localTime1.isBefore(localTime2)) return true;
+    public boolean eatingTimeBetween(LocalTime currentTime,
+                                     LocalTime localTimeAfter,
+                                     LocalTime localTimeBefore){
+        if (currentTime.isAfter(localTimeAfter)
+            && currentTime.isBefore(localTimeBefore)) return true;
         return false;
     }
 

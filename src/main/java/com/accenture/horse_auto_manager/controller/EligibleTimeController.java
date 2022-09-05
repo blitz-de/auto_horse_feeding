@@ -1,7 +1,6 @@
 package com.accenture.horse_auto_manager.controller;
 
-import com.accenture.horse_auto_manager.model.dto.horses.HorseDTO;
-import com.accenture.horse_auto_manager.model.dto.horses.RFIDChipDTO;
+
 import com.accenture.horse_auto_manager.services.food.TimedEligibleFoodService;
 import com.accenture.horse_auto_manager.services.horse.HorseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/eating-time", produces = {MediaType.APPLICATION_JSON_VALUE})

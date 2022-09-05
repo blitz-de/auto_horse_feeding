@@ -46,32 +46,8 @@ public class HorseService {
     @Autowired
     RFIDRepository rfidChipRepository;
 
-    boolean operationFeedingDone = false;
+    //boolean operationFeedingDone = false;
 
-    public void feed(){
-        //if horse is while can not eat oat
-        //if horse is brown or black can eat oat
-        // eat 2x oats, 3x hay, 1x pressed grass
-        /*
-        if (horse.getColor().equals("brown")
-                || horse.getColor().equals("black") &&
-                eatingTimeBetween(breakfast, launch))
-        {
-            releasedFood("oat", "hay", "grass");
-        }
-        releasedFood("hay", "pressed grass");
-
-         */
-    }
-
-
-    public String feedingCycle(String foodtype) {
-        List<FoodEntity> mealList = null; // taken from repository (DB)
-        if (foodtype.equals("oat")){
-            //mealList.remove(""); mealList.remove(200*MealEntity.portionInGrams());
-        }
-        return null;
-    }
 
     public List<HorseDTO> getHorses() {
 
@@ -119,11 +95,6 @@ public class HorseService {
         return horseEntityMapper.mapHorseEntityToHorseDTO(horseEntity);
     }
 
-
-    /////////////////////////////
-
-
-    ////////////////////////////
 
     private RFIDChipEntity saveEatingTimes(HorseDTO horseDTO,
                                 RFIDChipEntity rfidChipEntity){

@@ -1,6 +1,5 @@
 package com.accenture.horse_auto_manager.controller;
 
-import com.accenture.horse_auto_manager.model.dto.horses.HorseDTO;
 import com.accenture.horse_auto_manager.services.horse.FoodPreferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -21,10 +21,10 @@ import java.util.List;
 @Service
 public class FoodPreferenceService implements IFeedingPreference {
 
-    LocalTime breakfast = LocalTime.parse("06:00:00");
-    LocalTime launch = LocalTime.parse("11:00:00");
-    LocalTime dinner = LocalTime.parse("17:00:00");
-    LocalTime sleepTime = LocalTime.parse("21:00:00");
+    LocalTime breakfast = LocalTime.parse("06:59:59");
+    LocalTime launch = LocalTime.parse("11:59:59");
+    LocalTime dinner = LocalTime.parse("18:59:59");
+    LocalTime sleepTime = LocalTime.parse("22:00:00");
     @Autowired
     FoodRepository foodRepository;
     @Autowired
@@ -44,7 +44,8 @@ public class FoodPreferenceService implements IFeedingPreference {
         List<String> preference = feedingPreference(horseColor);
         // if (horseColor.equals("brown")){
         preference.forEach(food -> {
-            if(timedEligibleFoodService.eatingTimeBetween(LocalTime.now(), launch)){
+            if(timedEligibleFoodService.eatingTimeBetween(LocalTime.now(),
+                    breakfast,launch)){ // add boolean in condition if they ate already
                 // if openForBreakfast etc.
                 if (releaseFoodService.openForBreakfast
                         (horseDTO.getChip_id(),horseDTO)){
@@ -52,20 +53,22 @@ public class FoodPreferenceService implements IFeedingPreference {
                 }
 
             }
-            if (timedEligibleFoodService.eatingTimeBetween(LocalTime.now(), dinner)){
-                if (releaseFoodService.openForBreakfast
+            if (timedEligibleFoodService.eatingTimeBetween(LocalTime.now(),
+                    launch, dinner)){
+                if (releaseFoodService.openForLaunch
                         (horseDTO.getChip_id(),horseDTO)) {
                     horseEatsFromFoodContainer(horseDTO, food);
                 }
             }
-            if (timedEligibleFoodService.eatingTimeBetween(LocalTime.now(), sleepTime)){
-                if (releaseFoodService.openForBreakfast
+            if (timedEligibleFoodService.eatingTimeBetween(LocalTime.now(),
+                    dinner, sleepTime )){
+                if (releaseFoodService.openForDinner
                         (horseDTO.getChip_id(),horseDTO)) {
                     horseEatsFromFoodContainer(horseDTO, food);
                 }
             }
         });
-        return "horse didn't eat!";
+        return "Bonne Appetit!";
     }
 
     // Each horse with a different color has different food preference

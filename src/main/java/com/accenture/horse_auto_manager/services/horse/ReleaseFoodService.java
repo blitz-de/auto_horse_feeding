@@ -3,16 +3,11 @@ package com.accenture.horse_auto_manager.services.horse;
 import com.accenture.horse_auto_manager.model.domain.horses.RFIDChipEntity;
 import com.accenture.horse_auto_manager.model.dto.horses.HorseDTO;
 import com.accenture.horse_auto_manager.repositories.horses.RFIDRepository;
-import net.bytebuddy.asm.Advice;
-import org.flywaydb.core.internal.util.DataUnits;
-import org.flywaydb.core.internal.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,14 +18,10 @@ public class ReleaseFoodService {
     LocalTime dinner = LocalTime.parse("17:00:00");
     LocalTime sleepTime = LocalTime.parse("21:00:00");
 
-   // @Autowired FoodPreferenceService foodPreferenceService;
-
-    //boolean operation_done = false;
-    int eatingTimes = 3; // breakfast, launch, dinner
     @Autowired RFIDRepository rfidRepository;
-    public List<String> releasedFood(String... foodtype) {
+    /*public List<String> releasedFood(String... foodtype) {
         return Arrays.asList(foodtype);
-    }
+    }*/
 
     public boolean openForBreakfast(Long chip_id, HorseDTO horseDTO) {
         RFIDChipEntity rfidChipEntity = rfidRepository.findById(chip_id).get();
@@ -46,7 +37,7 @@ public class ReleaseFoodService {
 
         } else {
             rfidChipEntity.setOperationDone(false);
-            return rfidChipEntity.isHadBreakfast();
+            return false;
         }
     }
     public boolean openForLaunch(Long chip_id, HorseDTO horseDTO) {
@@ -63,7 +54,7 @@ public class ReleaseFoodService {
 
         } else {
             rfidChipEntity.setOperationDone(false);
-            return rfidChipEntity.isHadLaunch(); //false
+            return false;
         }
     }
     public boolean openForDinner(Long chip_id, HorseDTO horseDTO) {
@@ -79,7 +70,7 @@ public class ReleaseFoodService {
 
         } else {
             rfidChipEntity.setOperationDone(false);
-            return rfidChipEntity.isHadDinner(); //false
+            return false; //false
         }
         //false
     }

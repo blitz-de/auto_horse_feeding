@@ -3,7 +3,6 @@ package com.accenture.horse_auto_manager.model.domain.horses;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -15,7 +14,7 @@ public class RFIDChipEntity { // horse has a GUID-CHIP
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long chip_id;
     @Column(name = "time_of_released_food")
-    private LocalTime timeOfReleasedFood; //feeding cycle = length.timeOfReleasedFood per day
+    private LocalTime timeOfReleasedFood;
     @Column(name = "feeding_station")
     private String feedingStation;
     @Column(name = "food_released")

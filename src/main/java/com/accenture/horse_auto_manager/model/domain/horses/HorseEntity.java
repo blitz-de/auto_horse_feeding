@@ -8,12 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-// Hibernate oder flyway -- Futterzeit
 @Entity
 @Table(name = "tab_horses")
 @Getter
 @Setter
-//@ToString
 public class HorseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +23,11 @@ public class HorseEntity {
     @Column(name = "breed_name")
     private String breedName;
     private String type; // horse or pony
-    //private HashMap<HorseEntity, String> food_preferences;
+
 
 
     @ManyToOne//(cascade = CascadeType.ALL)
-    @JoinColumn(name = "doctor_id") // doctorID
+    @JoinColumn(name = "doctor_id")
     private DoctorEntity doctor;
     @ManyToOne
     @JoinColumn(name = "stableman_id")
@@ -53,5 +51,4 @@ public class HorseEntity {
     @ManyToOne
     @JoinColumn(name = "medicine_id")
     private MedicineEntity medicine;
-    // typ-rasse-
 }

@@ -25,8 +25,6 @@ public class DoctorService {
     DoctorRepository doctorRepository;
 
     @Autowired
-    HorseEntityToHorseDTOMapper horseEntityMapper;
-    @Autowired
     HorseService horseService;
     public DoctorDTO createDoctor(DoctorDTO doctorDTO){
         DoctorEntity doctorEntity =doctorDTOMapper.mapDoctorDTOToDoctorEntity(doctorDTO);
@@ -45,13 +43,7 @@ public class DoctorService {
     public DoctorDTO assignHorseToDoctor(Long horse_id, Long doctor_id) {
         DoctorEntity doctorEntity = doctorRepository.findById(doctor_id).get();
         HorseEntity horse = horseService.getHorseEntityById(horse_id);
-        //doctorEntity = doctorDTOMapper.mapDoctorDTOToDoctorEntity(doctorEntity);
 
-
-        /*
-        1. doctorEntity.setHorse
-         */
-        // getHorseByID -- add Horse to HorseList
         doctorEntity.getHorses().add(horse);
         return doctorEntityMapper.mapDoctorEntityToDoctorDTO(doctorEntity);
     }

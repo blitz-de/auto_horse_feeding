@@ -1,6 +1,5 @@
 package com.accenture.horse_auto_manager.controller;
 
-import com.accenture.horse_auto_manager.model.domain.horses.RFIDChipEntity;
 import com.accenture.horse_auto_manager.model.dto.horses.HorseDTO;
 import com.accenture.horse_auto_manager.repositories.horses.RFIDRepository;
 import com.accenture.horse_auto_manager.services.horse.HorseService;
