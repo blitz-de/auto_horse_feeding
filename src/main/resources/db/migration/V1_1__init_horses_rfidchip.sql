@@ -5,6 +5,7 @@ create table tab_horses(
     color varchar(100),
     breed_name varchar(100),
     type varchar(100),
+
     doctor_id bigint,
     stableman_id bigint,
     chip_id bigint,
@@ -19,6 +20,9 @@ create table tab_rfid_chip(
     feeding_station varchar(100),
     food_released boolean default false,
     operation_done boolean default false,
+    breakfast_time time,
+    launch_time time,
+    dinner_time time,
     had_breakfast boolean default false,
     had_launch boolean default false,
     had_dinner boolean default false,

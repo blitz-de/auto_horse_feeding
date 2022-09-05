@@ -46,4 +46,35 @@ public class FoodService {
         foodEntity = foodRepository.save(foodEntity);
         return foodEntityMapper.mapFoodEntityToFoodDToMapper(foodEntity);
     }
+
+    public FoodDTO addFoodToStorageById(Long food_id, Long addFood) {
+        FoodEntity foodEntity = foodRepository.findById(food_id).get();
+        FoodDTO foodDTO;
+        Long addedFood;
+        if (foodEntity.getFoodLeft() == null){
+            foodEntity.setFoodLeft(0L);
+        }
+        if(foodEntity.getFoodName().equals("oat")) {
+            addedFood = foodEntity.getFoodLeft() +addFood;
+            foodEntity.setFoodLeft(addedFood);
+            foodRepository.save(foodEntity);
+            foodDTO = foodEntityMapper.mapFoodEntityToFoodDToMapper(foodEntity);
+            return foodDTO;
+        }
+        if(foodEntity.getFoodName().equals("hay")) {
+            addedFood = foodEntity.getFoodLeft() +addFood;
+            foodEntity.setFoodLeft(addedFood);
+            foodRepository.save(foodEntity);
+            foodDTO = foodEntityMapper.mapFoodEntityToFoodDToMapper(foodEntity);
+            return foodDTO;
+        }
+        if(foodEntity.getFoodName().equals("Pressed-Grass")) {
+            addedFood = foodEntity.getFoodLeft() +addFood;
+            foodEntity.setFoodLeft(addedFood);
+            foodRepository.save(foodEntity);
+            foodDTO = foodEntityMapper.mapFoodEntityToFoodDToMapper(foodEntity);
+            return foodDTO;
+        }
+        return null;
+    }
 }

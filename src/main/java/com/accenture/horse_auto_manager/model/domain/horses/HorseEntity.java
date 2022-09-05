@@ -4,14 +4,10 @@ import com.accenture.horse_auto_manager.model.domain.food.FoodEntity;
 import com.accenture.horse_auto_manager.model.domain.food.MedicineEntity;
 import com.accenture.horse_auto_manager.model.domain.person.DoctorEntity;
 import com.accenture.horse_auto_manager.model.domain.person.StablemanEntity;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
-
 // Hibernate oder flyway -- Futterzeit
 @Entity
 @Table(name = "tab_horses")
@@ -30,6 +26,7 @@ public class HorseEntity {
     private String breedName;
     private String type; // horse or pony
     //private HashMap<HorseEntity, String> food_preferences;
+
 
     @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "doctor_id") // doctorID

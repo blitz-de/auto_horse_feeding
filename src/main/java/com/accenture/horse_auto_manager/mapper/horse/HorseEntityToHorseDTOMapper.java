@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface HorseEntityToHorseDTOMapper {
 
-    @Mapping(target = "doctorName", source = "source.doctor.lastname")
-    @Mapping(target = "stablemanName", source = "source.stableman.lastname")
+    //@Mapping(target = "doctorName", source = "source.doctor.lastname")
+    //@Mapping(target = "stablemanName", source = "source.stableman.lastname")
     @Mapping(target = "chip_id", source = "source.rfidChip.chip_id")
     HorseDTO mapHorseEntityToHorseDTO(HorseEntity source);
 

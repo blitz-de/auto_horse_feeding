@@ -2,11 +2,11 @@ package com.accenture.horse_auto_manager.model.dto.food;
 
 import com.accenture.horse_auto_manager.model.domain.horses.HorseEntity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.List;
-
-@Data
+@Getter
+@Setter
 public class MedicineDTO {
 
     private Long medicineID;

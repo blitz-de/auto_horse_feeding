@@ -1,6 +1,8 @@
 package com.accenture.horse_auto_manager.controller;
 
+import com.accenture.horse_auto_manager.model.domain.horses.RFIDChipEntity;
 import com.accenture.horse_auto_manager.model.dto.horses.HorseDTO;
+import com.accenture.horse_auto_manager.repositories.horses.RFIDRepository;
 import com.accenture.horse_auto_manager.services.horse.HorseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,14 +18,28 @@ public class HorseController {
 
     @Autowired
     private HorseService horseService;
-
+    @Autowired
+    RFIDRepository rfidRepository;
     @GetMapping("/all")
     public ResponseEntity<List<HorseDTO>> getHorses(){
         return ResponseEntity.status(HttpStatus.OK).body(horseService.getHorses());
     }
 
+    @GetMapping("/{horse_id}")
+    public ResponseEntity<HorseDTO> getHorses(@PathVariable Long horse_id){
+        return ResponseEntity.status(HttpStatus.OK).body(horseService.getHorseById(horse_id));
+    }
     @PostMapping("/create")
-    public ResponseEntity<HorseDTO> createHorse(@RequestBody HorseDTO horseDTO){
+    public ResponseEntity<?> createHorse(@RequestBody HorseDTO horseDTO){
+
+        /*
+        if(!horseService.ifChipDoNotExistInStorage(horseDTO.getChip_id())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("You don't have a chip with this ID in your storage. " +
+                            "Please choose an existing chip ID.");
+        }
+         */
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(horseService.createHorse(horseDTO));
     }

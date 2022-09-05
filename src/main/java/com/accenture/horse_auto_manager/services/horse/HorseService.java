@@ -9,7 +9,6 @@ import com.accenture.horse_auto_manager.model.domain.horses.RFIDChipEntity;
 import com.accenture.horse_auto_manager.model.domain.person.DoctorEntity;
 import com.accenture.horse_auto_manager.model.domain.person.StablemanEntity;
 import com.accenture.horse_auto_manager.model.dto.horses.HorseDTO;
-import com.accenture.horse_auto_manager.model.dto.horses.RFIDChipDTO;
 import com.accenture.horse_auto_manager.repositories.food.FoodRepository;
 import com.accenture.horse_auto_manager.repositories.food.MedicineRepository;
 import com.accenture.horse_auto_manager.repositories.horses.HorseRepository;
@@ -104,16 +103,49 @@ public class HorseService {
     /*TODO:
         See if you can do it shorter.
      */
+
+    // every new horse has to be assigned a chip by the user. The chip is taken out of storage.
+    // available chips are 10. Ids: 1-10
     public HorseDTO createHorse(HorseDTO horseDTO) {
         HorseEntity horseEntity = horseDTOMapper.mapHorseDTOToHorseEntity(horseDTO);
 
-        // begin: these lines to make shorter
+        // will find chip from storage and assign it to horse according to input from user
         RFIDChipEntity rfidChipEntity = rfidChipRepository.findById(horseDTO.getChip_id()).get();
+        rfidChipEntity = saveEatingTimes(horseDTO, rfidChipEntity);
+
         horseEntity.setRfidChip(rfidChipEntity);
-        // end
         horseEntity = horseRepository.save(horseEntity);
 
         return horseEntityMapper.mapHorseEntityToHorseDTO(horseEntity);
+    }
+
+
+    /////////////////////////////
+
+
+    ////////////////////////////
+
+    private RFIDChipEntity saveEatingTimes(HorseDTO horseDTO,
+                                RFIDChipEntity rfidChipEntity){
+        if (horseDTO.getColor().equals("black")) {
+            rfidChipEntity.setBreakfastTime(LocalTime.parse("07:00:00"));
+            rfidChipEntity.setLaunchTime(LocalTime.parse("12:00:00"));
+            rfidChipEntity.setDinnerTime(LocalTime.parse("17:00:00"));
+            return rfidChipEntity;
+        }
+        if (horseDTO.getColor().equals("brown")) {
+            rfidChipEntity.setBreakfastTime(LocalTime.parse("09:00:00"));
+            rfidChipEntity.setLaunchTime(LocalTime.parse("14:00:00"));
+            rfidChipEntity.setDinnerTime(LocalTime.parse("16:00:00"));
+            return rfidChipEntity;
+        }
+        if (horseDTO.getColor().equals("white")) {
+            rfidChipEntity.setBreakfastTime(LocalTime.parse("11:00:00"));
+            rfidChipEntity.setLaunchTime(LocalTime.parse("16:00:00"));
+            rfidChipEntity.setDinnerTime(LocalTime.parse("21:00:00"));
+            return rfidChipEntity;
+        }
+        return rfidChipEntity;
     }
     public HorseDTO assignDoctorToHorse(Long doctor_id, Long horse_id) {
         HorseEntity horseEntity = getHorseEntityById(horse_id);
@@ -154,5 +186,11 @@ public class HorseService {
         horseEntity = horseRepository.save(horseEntity);
 
         return horseEntityMapper.mapHorseEntityToHorseDTO(horseEntity);
+    }
+
+    public boolean ifChipDoNotExistInStorage(Long horse_id) {
+        if(!horseRepository.existsById(horse_id))
+            return true;
+        return false;
     }
 }

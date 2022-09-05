@@ -19,15 +19,15 @@ import java.util.List;
 public class ReleaseFoodService {
 
     LocalTime breakfast = LocalTime.parse("06:00:00");
-    LocalTime launch = LocalTime.parse("11:00:00");
+    LocalTime launch = LocalTime.parse("12:00:00");
     LocalTime dinner = LocalTime.parse("17:00:00");
     LocalTime sleepTime = LocalTime.parse("21:00:00");
 
-    @Autowired FoodPreferenceService foodPreferenceService;
+   // @Autowired FoodPreferenceService foodPreferenceService;
 
     //boolean operation_done = false;
     int eatingTimes = 3; // breakfast, launch, dinner
-    RFIDRepository rfidRepository;
+    @Autowired RFIDRepository rfidRepository;
     public List<String> releasedFood(String... foodtype) {
         return Arrays.asList(foodtype);
     }
@@ -37,7 +37,7 @@ public class ReleaseFoodService {
 
         if (rfidChipEntity.isHadBreakfast() == false
                 && releaseFoodOnOpeningHours(rfidChipEntity)){
-            foodPreferenceService.feed(horseDTO);
+            //foodPreferenceService.feed(horseDTO.getGuid());
             rfidChipEntity.setOperationDone(true);
             rfidChipEntity.setHadBreakfast(true);
             rfidRepository.save(rfidChipEntity);
@@ -54,7 +54,7 @@ public class ReleaseFoodService {
 
         if (rfidChipEntity.isHadLaunch() == false
                 && releaseFoodOnOpeningHours(rfidChipEntity)){
-            foodPreferenceService.feed(horseDTO);
+           // foodPreferenceService.feed(horseDTO.getGuid());
             rfidChipEntity.setOperationDone(true);
             rfidChipEntity.setHadLaunch(true);
             rfidRepository.save(rfidChipEntity);
@@ -70,7 +70,7 @@ public class ReleaseFoodService {
         RFIDChipEntity rfidChipEntity = rfidRepository.findById(chip_id).get();
         if (rfidChipEntity.isHadDinner() == false
                 && releaseFoodOnOpeningHours(rfidChipEntity)){
-            foodPreferenceService.feed(horseDTO);
+            //foodPreferenceService.feed(horseDTO.getGuid());
             rfidChipEntity.setOperationDone(true);
             rfidChipEntity.setHadDinner(true);
             rfidRepository.save(rfidChipEntity);
@@ -142,28 +142,3 @@ public class ReleaseFoodService {
     }
      */
 }
-
-
-            /*
-            if (currentDate > releaseDate && getEatingTimes() == 0) --> setEatingTimes(3);
-            if currenttime is morning setEatingTimes 0 and add 1 again.
-             */
-//if (LocalDateTime.now().isAfter(rfidChipEntity.getTimeOfReleasedFood()))
-
-            /*
-            Scan -- Table namend visiting_table
-            insert --pferdMitId -- visiting_date -- anzahl_der_besuche --
-             */
-
-
-        /*
-        1. horse walks to station
-        2. station checks if horse has eaten breakfast or launch or dinner already
-            i. if (breakfast.before(launch) && !rfidChipEntity.isOperationDone()
-                    feed(horseDTO);
-                    eatingTimes--;
-                    rdifChipEntity.setOperationDone(true);
-                    closeFoodContainer();
-        3. station opens container for horse
-        4. station closes.
-         */

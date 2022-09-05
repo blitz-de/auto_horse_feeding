@@ -35,4 +35,11 @@ public class FoodController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(foodService.createFood(foodDTO));
     }
+
+    @PostMapping("/add-to-storage/{food_id}")
+    public ResponseEntity<FoodDTO> addFoodToStorage(@PathVariable("food_id") Long food_id,
+                                                    @RequestParam("add-food") Long addFood){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(foodService.addFoodToStorageById(food_id, addFood));
+    }
 }

@@ -32,6 +32,14 @@ public class RFIDChipEntity { // horse has a GUID-CHIP
     @Column(name = "had_dinner")
     private boolean hadDinner = false;
 
+    //TODO: check again if it was a good idea. and add to DTO
+    @Column(name = "breakfast_time")
+    private LocalTime breakfastTime; // 07:00. 09:00, 11:00
+    @Column(name = "launch_time")
+    private LocalTime launchTime; // 12:00, 14:00, 16:00
+    @Column(name = "dinner_time")
+    private LocalTime dinnerTime; // 17:00, 19:00, 21:00
+
     @OneToOne(mappedBy = "rfidChip")
     private HorseEntity horse;
 
